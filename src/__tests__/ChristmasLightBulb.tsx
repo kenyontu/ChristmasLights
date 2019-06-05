@@ -3,7 +3,7 @@ import 'jest-dom/extend-expect';
 import 'react-testing-library/cleanup-after-each';
 import {render, cleanup} from 'react-testing-library';
 
-import ChristmasLightBulb from '../ChristmasLightBulb';
+import ChristmasLightBulb from '../components/ChristmasLightBulb';
 
 afterEach(cleanup);
 
