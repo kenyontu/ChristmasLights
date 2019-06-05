@@ -1,4 +1,9 @@
+export interface Color {
+  id: string;
+  value: string;
+}
+
 export interface Settings {
-  colors: string[];
+  colors: Color[];
   rows: number;
 }

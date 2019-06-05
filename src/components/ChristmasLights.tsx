@@ -4,13 +4,14 @@ import {throttle} from 'lodash';
 import color from 'color';
 import {useSprings} from 'react-spring';
 
+import {Color} from '../types';
 import ChristmastLightBulb from './ChristmasLightBulb';
 import {useInterval} from '../hooks';
 
 const lightsInRow = 7;
 
 interface Props {
-  colors: string[];
+  colors: Color[];
   rows?: number;
   isPlaying?: boolean;
 }
@@ -79,7 +80,7 @@ const useSizes = () => {
 // Hook that returns rendered light bulbs
 const useRenderLightBulbs = (
   isPlaying: boolean,
-  colors: string[],
+  colors: Color[],
   numberOfLights: number,
   bulbSize: number
 ) => {
@@ -88,13 +89,17 @@ const useRenderLightBulbs = (
   const stepCounter = useRef(0);
 
   // Creates an array of lightbulbs
-  const lightBulbs = useMemo(() => {
+  const lightBulbs: {
+    id: string;
+    color: string;
+    offColor: string;
+  }[] = useMemo(() => {
     const arr = [];
 
     // Colors for the off state
     const offColors = colors.map(c =>
-      color(c)
-        .darken(0.85)
+      color(c.value)
+        .darken(0.8)
         .rgb()
         .toString()
     );
@@ -103,8 +108,8 @@ const useRenderLightBulbs = (
     for (let i = 0; i < numberOfLights; i++) {
       colorIndex = i % lightsInRow;
       arr.push({
-        id: i,
-        onColor: colors[colorIndex],
+        id: colors[colorIndex].id,
+        color: colors[colorIndex].value,
         offColor: offColors[colorIndex]
       });
     }
@@ -125,9 +130,9 @@ const useRenderLightBulbs = (
     if ((i % lightsInRow) % 2 === stepCounter.current % 2) {
       return {
         to: {
-          backgroundColor: lightBulbs[i].onColor,
+          backgroundColor: lightBulbs[i].color,
           boxShadow: `0px 0px ${bulbSize * 0.5}px ${bulbSize * 0.2}px ${
-            lightBulbs[i].onColor
+            lightBulbs[i].color
           }`,
           zIndex: 1
         },

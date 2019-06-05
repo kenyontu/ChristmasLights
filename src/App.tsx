@@ -4,6 +4,7 @@ import {FiPlay, FiPause, FiSettings} from 'react-icons/fi';
 
 import ChristmastLights from './components/ChristmasLights';
 import {Settings} from './types';
+import {assignIdsToArrayItems} from './utils';
 
 const Container = styled.div`
   height: 100%;
@@ -42,7 +43,7 @@ const MenuContainer = styled.div`
 `;
 
 const initialSettings: Settings = {
-  colors: [
+  colors: assignIdsToArrayItems([
     '#165B33',
     '#BB2528',
     '#146B3A',
@@ -50,7 +51,7 @@ const initialSettings: Settings = {
     '#146B3A',
     '#BB2528',
     '#165B33'
-  ],
+  ]),
   rows: 1
 };
 
