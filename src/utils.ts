@@ -1,13 +1,16 @@
 import shortid from 'shortid';
 
-type AssignIdsToArrayItems = <T = {}>(array: T[]) => ({id: string; value: T})[];
+/**
+ * Creates a new array assigning a unique id to each item
+ */
+export const assignIdsToArrayItems = <T = {}>(
+  array: T[]
+): ({id: string; value: T})[] => array.map(assignId);
 
-type AssignId = <T = {}>(value: T) => {id: string; value: T};
-
-export const assignIdsToArrayItems: AssignIdsToArrayItems = array =>
-  array.map(assignId);
-
-export const assignId: AssignId = value => ({
+/**
+ * Assigns a new unique id to the passed value.
+ */
+export const assignId = <T = {}>(value: T): {id: string; value: T} => ({
   id: shortid.generate(),
   value
 });
