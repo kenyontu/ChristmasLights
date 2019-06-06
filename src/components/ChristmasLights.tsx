@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {throttle} from 'lodash';
 import color from 'color';
 import {useSprings} from 'react-spring';
+import shortid from 'shortid';
 
 import {Color} from '../types';
 import ChristmastLightBulb from './ChristmasLightBulb';
@@ -108,7 +109,7 @@ const useRenderLightBulbs = (
     for (let i = 0; i < numberOfLights; i++) {
       colorIndex = i % lightsInRow;
       arr.push({
-        id: colors[colorIndex].id,
+        id: shortid.generate(),
         color: colors[colorIndex].value,
         offColor: offColors[colorIndex]
       });
