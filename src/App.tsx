@@ -59,7 +59,8 @@ const initialSettings: Settings = {
     '#BB2528',
     '#165B33'
   ]),
-  rows: 1
+  rows: 7,
+  patternIndex: 4
 };
 
 const App: React.FC = () => {
@@ -102,11 +103,7 @@ const App: React.FC = () => {
         />
       </MenuContainer>
 
-      <ChristmastLights
-        isPlaying={isPlaying}
-        colors={settings.colors}
-        rows={settings.rows}
-      />
+      <ChristmastLights isPlaying={isPlaying} settings={settings} />
       <SettingsView
         settings={settings}
         onChange={onSettingChange}

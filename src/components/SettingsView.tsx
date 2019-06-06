@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {animated, useSpring, useTransition} from 'react-spring';
 
 import {Settings} from '../types';
+import patterns from '../patterns';
 import RowNumberSelector from './NumberSelector';
 
 interface Props {
@@ -110,9 +111,10 @@ const SettingsView: React.FC<Props> = ({settings, isOpen, close, onChange}) => {
         <div>
           <Header>Pattern</Header>
           <RowNumberSelector
-            value={0}
-            max={0}
-            onChange={() => {}}
+            value={settings.patternIndex}
+            min={0}
+            max={patterns.length - 1}
+            onChange={patternIndex => onChange({patternIndex})}
             formatter={v => `P${v + 1}`}
           />
         </div>

@@ -5,16 +5,16 @@ import color from 'color';
 import {useSprings} from 'react-spring';
 import shortid from 'shortid';
 
-import {Color} from '../types';
+import {Settings, Color, PatternFunction} from '../types';
+import patterns from '../patterns';
 import ChristmastLightBulb from './ChristmasLightBulb';
 import {useInterval} from '../hooks';
 
 const lightsInRow = 7;
 
 interface Props {
-  colors: Color[];
-  rows?: number;
   isPlaying?: boolean;
+  settings: Settings;
 }
 
 const Container = styled.div<{spacing: number}>`
@@ -26,17 +26,15 @@ const Container = styled.div<{spacing: number}>`
   align-items: center;
 `;
 
-const ChristmasLights: React.FC<Props> = ({
-  colors,
-  rows = 1,
-  isPlaying = true
-}) => {
+const ChristmasLights: React.FC<Props> = ({settings, isPlaying = true}) => {
+  const {colors, rows, patternIndex} = settings;
   const {bulbSize, spacing} = useSizes();
   const lightBulbs = useRenderLightBulbs(
     isPlaying,
     colors,
     rows * lightsInRow,
-    bulbSize
+    bulbSize,
+    patterns[patternIndex]
   );
   return <Container spacing={spacing}>{lightBulbs}</Container>;
 };
@@ -83,7 +81,8 @@ const useRenderLightBulbs = (
   isPlaying: boolean,
   colors: Color[],
   numberOfLights: number,
-  bulbSize: number
+  bulbSize: number,
+  patternFunction: PatternFunction
 ) => {
   // A counter for the steps in the animation, used to calculate
   // which lights are on
@@ -118,6 +117,11 @@ const useRenderLightBulbs = (
     return arr;
   }, [colors, numberOfLights]);
 
+  const pattern = useMemo(
+    () => patternFunction(lightBulbs.length, lightsInRow),
+    [lightBulbs, patternFunction]
+  );
+
   const createSpring = (i: number) => {
     // Controls which lights are on.
     // Cycles between two states:
@@ -128,7 +132,7 @@ const useRenderLightBulbs = (
     // Animation patterns, for example:
     // i % lightsInRow === stepCounter.current % lightsInRow
     // would turn on and off lights in a column sequentially
-    if ((i % lightsInRow) % 2 === stepCounter.current % 2) {
+    if (pattern(i, stepCounter.current)) {
       return {
         to: {
           backgroundColor: lightBulbs[i].color,
@@ -137,6 +141,7 @@ const useRenderLightBulbs = (
           }`,
           zIndex: 1
         },
+        duration: 150,
         immediate: (s: string) => s === 'zIndex'
       };
     }
@@ -147,18 +152,23 @@ const useRenderLightBulbs = (
         boxShadow: `0px 0px 0px 0px rgba(0,0,0,0)`,
         zIndex: 0
       },
+      duration: 150,
       immediate: (s: string) => s === 'zIndex' || s === 'boxShadow'
     };
   };
 
   const [springs, set] = useSprings(numberOfLights, createSpring);
 
+  useEffect(() => {
+    stepCounter.current = 0;
+  }, [pattern]);
+
   useInterval(() => {
     if (isPlaying) {
       stepCounter.current++;
       set(createSpring);
     }
-  }, 500);
+  }, 300);
 
   return springs.map((spring, i) => (
     <ChristmastLightBulb
