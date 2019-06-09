@@ -26,6 +26,7 @@ const Container = styled(animated.div)`
   top: 0;
   right: 0;
   overflow-y: auto;
+  user-select: none;
   @media (max-width: 480px) {
     left: 10vw;
   }
