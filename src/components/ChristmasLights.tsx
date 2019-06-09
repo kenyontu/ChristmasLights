@@ -153,7 +153,7 @@ const useRenderLightBulbs = (
         zIndex: 0
       },
       duration: 150,
-      immediate: (s: string) => s === 'zIndex' || s === 'boxShadow'
+      immediate: (s: string) => s === 'zIndex'
     };
   };
 
