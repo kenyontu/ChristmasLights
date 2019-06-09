@@ -161,7 +161,7 @@ const useRenderLightBulbs = (
 
   useEffect(() => {
     stepCounter.current = 0;
-  }, [pattern]);
+  }, [patternFunction]);
 
   useInterval(() => {
     if (isPlaying) {
