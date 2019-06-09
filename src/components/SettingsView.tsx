@@ -60,6 +60,7 @@ const Backdrop = styled(animated.div)`
   left: 0;
   z-index: 15;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Header = styled.span`
