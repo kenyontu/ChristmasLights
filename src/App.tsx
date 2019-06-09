@@ -59,7 +59,7 @@ const initialSettings: Settings = {
     '#FFC107',
     '#FF5722'
   ]),
-  rows: 1,
+  rows: 7,
   patternIndex: 0
 };
 
