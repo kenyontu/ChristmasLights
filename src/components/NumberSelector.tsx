@@ -53,6 +53,7 @@ color: #333333;
 @media (hover: hover) {
   &:hover {
     background-color: #e2e2e2;
+    cursor: pointer;
   }
 }
 &:active {
