@@ -168,7 +168,7 @@ const useRenderLightBulbs = (
       stepCounter.current++;
       set(createSpring);
     }
-  }, 300);
+  }, 250);
 
   return springs.map((spring, i) => (
     <ChristmastLightBulb
