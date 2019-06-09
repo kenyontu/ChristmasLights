@@ -121,7 +121,7 @@ const SettingsView: React.FC<Props> = ({settings, isOpen, close, onChange}) => {
           />
         </div>
         <div>
-          <Header>Colors</Header>
+          <Header>Colors (read-only)</Header>
           <ColorPreviewsContainer>
             {settings.colors.map(color => (
               <ColorPreview key={color.id} color={color.value} />
