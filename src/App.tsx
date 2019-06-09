@@ -51,16 +51,16 @@ const MenuContainer = styled.div`
 
 const initialSettings: Settings = {
   colors: assignIdsToArrayItems([
-    '#165B33',
-    '#BB2528',
-    '#146B3A',
-    '#BB2528',
-    '#146B3A',
-    '#BB2528',
-    '#165B33'
+    '#4CAF50',
+    '#5E35B1',
+    '#536DFE',
+    '#03A9F4',
+    '#CDDC39',
+    '#FFC107',
+    '#FF5722'
   ]),
-  rows: 7,
-  patternIndex: 4
+  rows: 1,
+  patternIndex: 0
 };
 
 const App: React.FC = () => {
