@@ -124,14 +124,6 @@ const useRenderLightBulbs = (
 
   const createSpring = (i: number) => {
     // Controls which lights are on.
-    // Cycles between two states:
-    // The 1st, 3rd, 5th and 7th lights only, are on
-    // The 2nd, 4th and 6th lights only, are on
-    //
-    // This could became a function parameter in the future to allow different
-    // Animation patterns, for example:
-    // i % lightsInRow === stepCounter.current % lightsInRow
-    // would turn on and off lights in a column sequentially
     if (pattern(i, stepCounter.current)) {
       return {
         to: {
