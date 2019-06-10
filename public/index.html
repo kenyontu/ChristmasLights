@@ -8,8 +8,9 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Christmas Lights</title>
   </head>
-  <body ontouchstart="">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <!-- ontouchstart="" fixes buttons getting focused after being clicked in mobile Safari -->
+    <div id="root" ontouchstart=""></div>
   </body>
 </html>
