@@ -30,8 +30,8 @@ const MenuContainer = styled.div`
     }
   }
   & svg {
-    width: 8vmin
-    height: 8vmin
+    width: 8vmin;
+    height: 8vmin;
     margin: 5px;
     cursor: pointer;
     &:active {
