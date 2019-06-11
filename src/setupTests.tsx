@@ -1,9 +1,3 @@
-import {Globals} from 'react-spring';
-
-const setup = () => {
-  Globals.assign({
-    skipAnimation: true
-  });
-};
+const setup = () => {};
 
 export default setup;
