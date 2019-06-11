@@ -37,7 +37,7 @@ const IncreaseIcon = styled(FiChevronRight)`
   height: 30px;
 `;
 
-const ValueContainer = styled.div`
+const ValueContainer = styled.span`
   flex: 5;
   color: #333333;
   font-weight: 700;
@@ -72,7 +72,7 @@ const ButtonContainer = styled.div<{disabled?: boolean}>`
   ${props => (props.disabled ? buttonDisabled : buttonEnabled)}
 `;
 
-const RowNumberSelector: React.FC<Props> = ({
+const NumberSelector: React.FC<Props> = ({
   value,
   onChange,
   formatter,
@@ -86,15 +86,25 @@ const RowNumberSelector: React.FC<Props> = ({
 
   return (
     <Container>
-      <ButtonContainer onClick={handleDecreaseClick} disabled={value === min}>
+      <ButtonContainer
+        onClick={handleDecreaseClick}
+        disabled={value === min}
+        data-testid="num-selector-decrease-btn"
+      >
         <DecreaseIcon />
       </ButtonContainer>
-      <ValueContainer>{formatter ? formatter(value) : value}</ValueContainer>
-      <ButtonContainer onClick={handleIncreaseClick} disabled={value === max}>
+      <ValueContainer data-testid="num-selector-value">
+        {formatter ? formatter(value) : value}
+      </ValueContainer>
+      <ButtonContainer
+        onClick={handleIncreaseClick}
+        disabled={value === max}
+        data-testid="num-selector-increase-btn"
+      >
         <IncreaseIcon />
       </ButtonContainer>
     </Container>
   );
 };
 
-export default React.memo(RowNumberSelector);
+export default React.memo(NumberSelector);

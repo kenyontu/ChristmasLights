@@ -97,11 +97,18 @@ const SettingsView: React.FC<Props> = ({settings, isOpen, close, onChange}) => {
     <>
       {backdropTransitions.map(
         ({item, key, props}) =>
-          item && <Backdrop key={key} style={props} onClick={close} />
+          item && (
+            <Backdrop
+              key={key}
+              style={props}
+              onClick={close}
+              data-testid="settings-backdrop"
+            />
+          )
       )}
 
       <Container style={settingsSringStyles} data-testid="settings-view">
-        <div>
+        <div data-testid="rows-setting-container">
           <Header>Rows</Header>
           <RowNumberSelector
             value={settings.rows}
@@ -110,7 +117,7 @@ const SettingsView: React.FC<Props> = ({settings, isOpen, close, onChange}) => {
             max={7}
           />
         </div>
-        <div>
+        <div data-testid="pattern-setting-container">
           <Header>Pattern</Header>
           <RowNumberSelector
             value={settings.patternIndex}
@@ -122,7 +129,7 @@ const SettingsView: React.FC<Props> = ({settings, isOpen, close, onChange}) => {
         </div>
         <div>
           <Header>Colors (read-only)</Header>
-          <ColorPreviewsContainer>
+          <ColorPreviewsContainer data-testid="color-settings-container">
             {settings.colors.map(color => (
               <ColorPreview key={color.id} color={color.value} />
             ))}
