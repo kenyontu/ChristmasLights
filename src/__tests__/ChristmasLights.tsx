@@ -3,23 +3,29 @@ import 'jest-dom/extend-expect';
 import 'react-testing-library/cleanup-after-each';
 import {render, cleanup} from 'react-testing-library';
 
+import {Settings} from '../types';
+import {assignIdsToArrayItems} from '../utils';
 import ChristmasLights from '../components/ChristmasLights';
 
 afterEach(cleanup);
 
-const colors = [
-  '#165B33',
-  '#BB2528',
-  '#146B3A',
-  '#BB2528',
-  '#146B3A',
-  '#BB2528',
-  '#165B33'
-];
+const settings: Settings = {
+  colors: assignIdsToArrayItems([
+    '#4CAF50',
+    '#5E35B1',
+    '#536DFE',
+    '#03A9F4',
+    '#CDDC39',
+    '#FFC107',
+    '#FF5722'
+  ]),
+  rows: 7,
+  patternIndex: 0
+};
 
 test('Renders 7 light bulbs', () => {
   const {getAllByTestId} = render(
-    <ChristmasLights isPlaying colors={colors} rows={1} />
+    <ChristmasLights isPlaying settings={{...settings, rows: 1}} />
   );
 
   const lightBulbs = getAllByTestId('light-bulb');
@@ -28,7 +34,7 @@ test('Renders 7 light bulbs', () => {
 
 test('Renders 14 light bulbs with 2 rows', () => {
   const {getAllByTestId} = render(
-    <ChristmasLights isPlaying colors={colors} rows={2} />
+    <ChristmasLights isPlaying settings={{...settings, rows: 2}} />
   );
 
   const lightBulbs = getAllByTestId('light-bulb');
@@ -37,7 +43,7 @@ test('Renders 14 light bulbs with 2 rows', () => {
 
 test('Renders 49 light bulbs with 7 rows', () => {
   const {getAllByTestId} = render(
-    <ChristmasLights isPlaying colors={colors} rows={7} />
+    <ChristmasLights isPlaying settings={settings} />
   );
 
   const lightBulbs = getAllByTestId('light-bulb');
