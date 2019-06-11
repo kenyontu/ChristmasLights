@@ -57,6 +57,9 @@
       ]
     }
   },
+  "jest": {
+    "globalSetup": "./src/setupTests.tsx"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
